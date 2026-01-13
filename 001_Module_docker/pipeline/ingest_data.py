@@ -1,12 +1,8 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# # Data Gathering
-
-# In[33]:
-
-
 import pandas as pd
+from sqlalchemy import create_engine
+from tqdm.auto import tqdm
+from database_engine import DatabaseEngine
+
 
 # Read a sample of the data
 prefix = 'https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/'
@@ -41,57 +37,10 @@ df = pd.read_csv(
     parse_dates=parse_dates
 )
 
-
-# In[34]:
-
-
-# Display first rows
-df.head()
+engine = DatabaseEngine(db_supplier='postgresql', host='localhost',
+                        port='5433', user='root', pwd='root', db='ny_taxy')
 
 
-# In[35]:
-
-
-# Check data types
-df.dtypes
-
-
-# In[36]:
-
-
-# Check data shape
-df.shape
-
-
-# # SQL Prep
-
-# In[37]:
-
-
-from sqlalchemy import create_engine
-engine = create_engine('postgresql://root:root@localhost:5433/ny_taxi')
-
-
-# In[38]:
-
-
-# How to create a table from pandas to pg
-print(pd.io.sql.get_schema(df, name='yellow_taxi_data', con=engine))
-
-
-# In[39]:
-
-
-# Create table (without any data n=0)
-df.head(n=0).to_sql(name='yellow_taxi_data', con=engine, if_exists='replace')
-
-
-# # Data Ingestion
-
-# In[40]:
-
-
-# Ingestion per batch
 df_iter = pd.read_csv(
     prefix + 'yellow_tripdata_2021-01.csv.gz',
     dtype=dtype,
@@ -101,10 +50,6 @@ df_iter = pd.read_csv(
 )
 
 
-# In[41]:
-
-
-from tqdm.auto import tqdm
 
 for df_chunk in tqdm(df_iter):
     df_chunk.to_sql(
