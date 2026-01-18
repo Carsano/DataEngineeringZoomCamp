@@ -34,10 +34,15 @@ parse_dates = [
 ]
 file_name = 'yellow_tripdata_2021-01.csv.gz'
 db_supplier = os.getenv("DB_SUPPLIER")
-host = os.getenv("HOSTNAME")
+host = "pgdatabase" # os.getenv("HOSTNAME")
 port = os.getenv("PORT")
 user = os.getenv("USERNAME")
 pwd = os.getenv("DB_PASSWORD")
+
+print(host)
+print(port)
+print(user)
+print(pwd)
 
 data_prep = DataPrep(dtype=dtype, parse_dates=parse_dates, prefix_path=prefix)
 engine = create_engine(f'{db_supplier}://{user}:{pwd}@{host}:{port}/ny_taxi')
