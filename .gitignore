@@ -15,3 +15,4 @@ answers.md
 # Data
 *.parquet
 *data/
+.terraform/
