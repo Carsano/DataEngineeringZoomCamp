@@ -8,23 +8,15 @@ terraform {
 }
 
 provider "google" {
-  project     = "dtc-de-course-484507"
-  region      = "europe-west9"
+  project = "dtc-de-course-484507"
+  region  = "europe-west9"
 }
 
-resource "google_storage_bucket" "auto-expire" {
-  name          = "auto-expiring-bucket"
-  location      = "US"
+resource "google_storage_bucket" "demo-bucket" {
+  name          = "dtc-de-course-484507-terra-bucket"
+  location      = "FR"
   force_destroy = true
 
-  lifecycle_rule {
-    condition {
-      age = 3
-    }
-    action {
-      type = "Delete"
-    }
-  }
 
   lifecycle_rule {
     condition {
