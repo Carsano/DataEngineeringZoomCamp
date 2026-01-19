@@ -7,8 +7,7 @@ load_dotenv()
 
 
 # Read a sample of the data
-prefix = 'https://github.com/DataTalksClub/' \
-         'nyc-tlc-data/releases/download/yellow/'
+prefix = './' # 'https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/'
 dtype = {
     "VendorID": "Int64",
     "passenger_count": "Int64",
@@ -29,12 +28,12 @@ dtype = {
 }
 
 parse_dates = [
-    "tpep_pickup_datetime",
-    "tpep_dropoff_datetime"
+    "lpep_pickup_datetime",
+    "lpep_dropoff_datetime"
 ]
-file_name = 'yellow_tripdata_2021-01.csv.gz'
+file_name = 'filename.csv'
 db_supplier = os.getenv("DB_SUPPLIER")
-host = "pgdatabase" # os.getenv("HOSTNAME")
+host = "localhost" # os.getenv("HOSTNAME")
 port = os.getenv("PORT")
 user = os.getenv("USERNAME")
 pwd = os.getenv("DB_PASSWORD")

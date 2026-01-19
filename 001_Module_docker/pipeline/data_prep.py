@@ -19,7 +19,7 @@ class DataPrep():
 
     def get_iter_data(self, file_name: str, chunksize: int = 10000):
         df_iter = pd.read_csv(
-            self.prefix_path + file_name,
+            file_name,
             dtype=self.dtype,
             parse_dates=self.parse_dates,
             iterator=True,
