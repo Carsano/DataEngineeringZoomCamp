@@ -5,10 +5,12 @@ build/
 dist/
 wheels/
 *.egg-info
+.DS_Store
 
 # Virtual environments
 .venv
-
+.env
+answers.md
 # Data
 *.parquet
 *data/
