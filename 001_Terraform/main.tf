@@ -17,7 +17,6 @@ resource "google_storage_bucket" "demo-bucket" {
   location      = "FR"
   force_destroy = true
 
-
   lifecycle_rule {
     condition {
       age = 1
